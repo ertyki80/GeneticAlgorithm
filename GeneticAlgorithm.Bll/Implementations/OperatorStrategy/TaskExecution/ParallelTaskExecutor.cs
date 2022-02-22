@@ -48,7 +48,7 @@ namespace GeneticAlgorithm.Implementations.OperatorStrategy.TaskExecution
             {
                 base.Start();
                 CancellationTokenSource = new CancellationTokenSource();
-                var parallelTasks = new Task[Tasks.Count];
+                Task[] parallelTasks = new Task[Tasks.Count];
 
                 for (int i = 0; i < Tasks.Count; i++)
                 {

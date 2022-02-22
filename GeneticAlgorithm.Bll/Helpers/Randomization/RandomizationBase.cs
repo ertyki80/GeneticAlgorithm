@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GeneticAlgorithm.Interfaces;
 
@@ -41,7 +42,7 @@ namespace GeneticAlgorithm.Helpers.Randomization
         /// <param name="max">Maximum value (exclusive).</param>
         public virtual int[] GetInts(int length, int min, int max)
         {
-            var ints = new int[length];
+            int[] ints = new int[length];
 
             for (int i = 0; i < length; i++)
             {
@@ -60,7 +61,7 @@ namespace GeneticAlgorithm.Helpers.Randomization
         /// <param name="max">Maximum value (exclusive).</param>
         public virtual int[] GetUniqueInts(int length, int min, int max)
         {
-            var diff = max - min;
+            int diff = max - min;
 
             if (diff < length)
             {
@@ -69,12 +70,12 @@ namespace GeneticAlgorithm.Helpers.Randomization
                     "The length is {0}, but the possible unique values between {1} (inclusive) and {2} (exclusive) are {3}.".With(length, min, max, diff));
             }
 
-            var orderedValues = Enumerable.Range(min, diff).ToList();
-            var ints = new int[length];
+            List<int> orderedValues = Enumerable.Range(min, diff).ToList();
+            int[] ints = new int[length];
 
             for (int i = 0; i < length; i++)
             {
-                var removeIndex = GetInt(0, orderedValues.Count);
+                int removeIndex = GetInt(0, orderedValues.Count);
                 ints[i] = orderedValues[removeIndex];
                 orderedValues.RemoveAt(removeIndex);
             }

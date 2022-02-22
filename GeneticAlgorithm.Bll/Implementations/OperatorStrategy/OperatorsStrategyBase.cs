@@ -41,7 +41,7 @@ namespace GeneticAlgorithm.Implementations.OperatorStrategy
         protected IList<IChromosome> SelectParentsAndCross(IPopulation population, ICrossover crossover,
             float crossoverProbability, IList<IChromosome> parents, int firstParentIndex)
         {
-            var selectedParents = parents.Skip(firstParentIndex).Take(crossover.ParentsNumber).ToList();
+            List<IChromosome> selectedParents = parents.Skip(firstParentIndex).Take(crossover.ParentsNumber).ToList();
 
             // If match the probability cross is made, otherwise the offspring is an exact copy of the parents.
             // Checks if the number of selected parents is equal which the crossover expect, because the in the end of the list we can

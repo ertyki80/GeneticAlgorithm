@@ -14,7 +14,7 @@ namespace GeneticAlgorithm.Implementations.OperatorStrategy.TaskExecution
         /// <returns>If has reach the timeout false, otherwise true.</returns>
         public override bool Start()
         {
-            var startTime = DateTime.Now;
+            DateTime startTime = DateTime.Now;
             base.Start();
 
             // For each Tasks passed to excutor, 

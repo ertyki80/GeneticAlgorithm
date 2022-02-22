@@ -32,7 +32,7 @@ namespace GeneticAlgorithm.Implementations.SelectionService
         /// <returns>The select chromosomes.</returns>
         protected override IList<IChromosome> PerformSelectChromosomes(int number, Generation generation)
         {
-            var ordered = generation.Chromosomes.OrderByDescending(c => c.Fitness);
+            IOrderedEnumerable<IChromosome> ordered = generation.Chromosomes.OrderByDescending(c => c.Fitness);
             return ordered.Take(number).ToList();
         }
 

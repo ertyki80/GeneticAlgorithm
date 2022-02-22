@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using GeneticAlgorithm.Implementations;
+using GeneticAlgorithm.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using GeneticAlgorithm.Web.Models;
 
@@ -12,11 +10,35 @@ namespace GeneticAlgorithm.Web.Controllers
     {
         public HomeController()
         {
+
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        
+        [HttpPost]
+        public IActionResult InitializeGeneticAlgorithm(
+            double[] limitX,
+            double[] limitY,
+            int populationMinSize,
+            int populationMaxSize,
+            float crossoverProbability,
+            float mutationProbability
+        )
+        {
+            IGeneticAlgorithmsForFindMinimum geneticAlgorithmsForFindMinimum = new GeneticAlgorithmsForFindMinimum();
+            geneticAlgorithmsForFindMinimum.Initialize(
+                limitX,
+                limitY,
+                populationMinSize,
+                populationMaxSize,
+                crossoverProbability,
+                mutationProbability
+            );
+            return Ok();
         }
 
         public IActionResult Privacy()

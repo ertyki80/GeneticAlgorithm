@@ -89,13 +89,13 @@ namespace GeneticAlgorithm.Implementations.SelectionService
                     "The tournament size is greater than available chromosomes. Tournament size is {0} and generation {1} available chromosomes are {2}.".With(Size, generation.Number, generation.Chromosomes.Count));
             }
 
-            var candidates = generation.Chromosomes.ToList();
-            var selected = new List<IChromosome>();
+            List<IChromosome> candidates = generation.Chromosomes.ToList();
+            List<IChromosome> selected = new List<IChromosome>();
 
             while (selected.Count < number)
             {
-                var randomIndexes = RandomizationProvider.Current.GetUniqueInts(Size, 0, candidates.Count);
-                var tournamentWinner = candidates.Where((c, i) => randomIndexes.Contains(i)).OrderByDescending(c => c.Fitness).First();
+                int[] randomIndexes = RandomizationProvider.Current.GetUniqueInts(Size, 0, candidates.Count);
+                IChromosome tournamentWinner = candidates.Where((c, i) => randomIndexes.Contains(i)).OrderByDescending(c => c.Fitness).First();
 
                 selected.Add(tournamentWinner);
 

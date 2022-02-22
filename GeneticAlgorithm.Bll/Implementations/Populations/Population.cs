@@ -117,11 +117,11 @@ namespace GeneticAlgorithm.Implementations.Populations
             Generations = new List<Generation>();
             GenerationsNumber = 0;
 
-            var chromosomes = new List<IChromosome>();
+            List<IChromosome> chromosomes = new List<IChromosome>();
 
             for (int i = 0; i < MinSize; i++)
             {
-                var c = AdamChromosome.CreateNew();
+                IChromosome c = AdamChromosome.CreateNew();
 
                 if (c == null)
                 {

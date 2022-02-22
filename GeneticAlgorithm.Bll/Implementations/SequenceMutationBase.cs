@@ -4,6 +4,7 @@ using GeneticAlgorithm.Helpers;
 using GeneticAlgorithm.Helpers.Randomization;
 using GeneticAlgorithm.Implementations.Mutation;
 using GeneticAlgorithm.Interfaces;
+using GeneticAlgorithm.Models;
 
 namespace GeneticAlgorithm.Implementations
 {
@@ -24,12 +25,12 @@ namespace GeneticAlgorithm.Implementations
 
             if (RandomizationProvider.Current.GetDouble() <= probability)
             {
-                var indexes = RandomizationProvider.Current.GetUniqueInts(2, 0, chromosome.Length).OrderBy(i => i).ToArray();
-                var firstIndex = indexes[0];
-                var secondIndex = indexes[1];
-                var sequenceLength = (secondIndex - firstIndex) + 1;
+                int[] indexes = RandomizationProvider.Current.GetUniqueInts(2, 0, chromosome.Length).OrderBy(i => i).ToArray();
+                int firstIndex = indexes[0];
+                int secondIndex = indexes[1];
+                int sequenceLength = (secondIndex - firstIndex) + 1;
 
-                var mutatedSequence = MutateOnSequence(chromosome.GetGenes().Skip(firstIndex).Take(sequenceLength)).ToArray();
+                Gene[] mutatedSequence = MutateOnSequence(chromosome.GetGenes().Skip(firstIndex).Take(sequenceLength)).ToArray();
                 
                 chromosome.ReplaceGenes(firstIndex, mutatedSequence);
             }

@@ -79,7 +79,7 @@ namespace GeneticAlgorithm.Implementations.ChromosomeService
                 throw new ArgumentOutOfRangeException(nameof(parents), "The number of parents should be the same of ParentsNumber.");
             }
 
-            var firstParent = parents[0];
+            IChromosome firstParent = parents[0];
 
             if (firstParent.Length < MinChromosomeLength)
             {

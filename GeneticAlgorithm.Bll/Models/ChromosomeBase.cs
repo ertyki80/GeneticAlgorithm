@@ -146,7 +146,7 @@ namespace GeneticAlgorithm.Models
         /// <returns>The chromosome clone.</returns>
         public virtual IChromosome Clone()
         {
-            var clone = CreateNew();
+            IChromosome clone = CreateNew();
             clone.ReplaceGenes(0, GetGenes());
             clone.Fitness = Fitness;
 
@@ -189,9 +189,9 @@ namespace GeneticAlgorithm.Models
                     throw new ArgumentOutOfRangeException(nameof(startIndex), $"There is no Gene on index {startIndex} to be replaced.");
                 }
 
-                var genesToBeReplacedLength = genes.Length;
+                int genesToBeReplacedLength = genes.Length;
 
-                var availableSpaceLength = m_length - startIndex;
+                int availableSpaceLength = m_length - startIndex;
 
                 if (genesToBeReplacedLength > availableSpaceLength)
                 {
@@ -250,7 +250,7 @@ namespace GeneticAlgorithm.Models
                 return -1;
             }
 
-            var otherFitness = other.Fitness;
+            double? otherFitness = other.Fitness;
 
             if (Fitness == otherFitness)
             {
@@ -268,7 +268,7 @@ namespace GeneticAlgorithm.Models
         /// <see cref="ChromosomeBase"/>; otherwise, <c>false</c>.</returns>
         public override bool Equals(object obj)
         {
-            var other = obj as IChromosome;
+            IChromosome other = obj as IChromosome;
 
             if (other == null)
             {

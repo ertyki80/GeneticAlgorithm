@@ -28,7 +28,7 @@ namespace GeneticAlgorithm.Helpers
         /// <param name="throwsException">If should throws an exception when the total bits is lower than needed by the value.</param>
         public static string ToRepresentation(long value, int totalBits, bool throwsException)
         {
-            var result = Convert.ToString(value, 2).PadLeft(totalBits, '0');
+            string result = Convert.ToString(value, 2).PadLeft(totalBits, '0');
 
             if (throwsException && totalBits > 0 && result.Length > totalBits)
             {
@@ -74,12 +74,12 @@ namespace GeneticAlgorithm.Helpers
                 throw new ArgumentException("The representation length should be the same of the sum of the totalBits.");
             }
 
-            var int64s = new long[totalBits.Length];
+            long[] int64s = new long[totalBits.Length];
             int startIndex = 0;
 
             for (int i = 0; i < totalBits.Length; i++)
             {
-                var currentTotalBits = totalBits[i];
+                int currentTotalBits = totalBits[i];
                 int64s[i] = ToInt64(representation.Substring(startIndex, currentTotalBits));
                 startIndex += currentTotalBits;
             }
@@ -96,9 +96,9 @@ namespace GeneticAlgorithm.Helpers
         /// <param name="fractionDigits">Fraction (scale) digits.</param>
         public static string ToRepresentation(double value, int totalBits = 0, int fractionDigits = 2)
         {
-            var longValue = Convert.ToInt64(value * Math.Pow(10, fractionDigits));
+            long longValue = Convert.ToInt64(value * Math.Pow(10, fractionDigits));
 
-            var result = ToRepresentation(longValue, totalBits, false);
+            string result = ToRepresentation(longValue, totalBits, false);
 
             if (totalBits > 0 && result.Length > totalBits)
             {
@@ -177,7 +177,7 @@ namespace GeneticAlgorithm.Helpers
 
             for (int i = 0; i < totalBits.Length; i++)
             {
-                var currentTotalBits = totalBits[i];
+                int currentTotalBits = totalBits[i];
                 values[i] = toValue(representation.Substring(startIndex, currentTotalBits), fractionDigits[i]);
                 startIndex += currentTotalBits;
             }
@@ -192,7 +192,7 @@ namespace GeneticAlgorithm.Helpers
                 throw new ArgumentException("The length of values should be the same of the length of totalBits and fractionDigits.");
             }
 
-            var representations = new string[values.Length];
+            string[] representations = new string[values.Length];
 
             for (int i = 0; i < values.Length; i++)
             {

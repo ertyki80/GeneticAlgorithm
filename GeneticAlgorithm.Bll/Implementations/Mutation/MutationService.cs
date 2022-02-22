@@ -19,7 +19,7 @@ namespace GeneticAlgorithm.Implementations.Mutation
         /// <param name="randomization">Random number generator to select next index to shuffle.</param>
         public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source, IRandomization randomization)
         {
-            var elements = source.ToArray();
+            T[] elements = source.ToArray();
             int swapIndex;
 
             for (int i = elements.Length - 1; i >= 0; i--)
@@ -53,7 +53,7 @@ namespace GeneticAlgorithm.Implementations.Mutation
         public static IEnumerable<T> RightShift<T>(this IEnumerable<T> source, int valueToShift)
         {
             // the last element (because we're skipping all but one)... then all but the last one.
-            var skipCount = source.Count() - valueToShift;
+            int skipCount = source.Count() - valueToShift;
 
             return source
                 .Skip(skipCount)

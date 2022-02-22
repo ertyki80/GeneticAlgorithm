@@ -51,7 +51,7 @@ namespace GeneticAlgorithm.Implementations.Mutation
         {
             ExceptionHelper.ThrowIfNull("chromosome", chromosome);
 
-            var genesLength = chromosome.Length;
+            int genesLength = chromosome.Length;
 
             if (m_mutableGenesIndexes == null || m_mutableGenesIndexes.Length == 0)
             {
@@ -67,7 +67,7 @@ namespace GeneticAlgorithm.Implementations.Mutation
 
             for (int i = 0; i < m_mutableGenesIndexes.Length; i++)
             {
-                var geneIndex = m_mutableGenesIndexes[i];
+                int geneIndex = m_mutableGenesIndexes[i];
 
                 if (geneIndex >= genesLength)
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using GeneticAlgorithm.Interfaces;
+using NCalc;
 
 namespace GeneticAlgorithm.Mathematic
 {
@@ -23,7 +24,7 @@ namespace GeneticAlgorithm.Mathematic
         {
             m_inputs = inputs;
 
-            var parametersCount = m_inputs[0].Arguments.Count;
+            int parametersCount = m_inputs[0].Arguments.Count;
             AvailableOperations = FunctionBuilderChromosome.BuildAvailableOperations(parametersCount);
             m_parameterNames = FunctionBuilderChromosome.GetParameterNames(parametersCount);
         }
@@ -45,16 +46,16 @@ namespace GeneticAlgorithm.Mathematic
         /// <returns>The fitness of the chromosome.</returns>
         public double Evaluate(IChromosome chromosome)
         {
-            var c = chromosome as FunctionBuilderChromosome;
-            var function = c.BuildFunction();
-            var fitness = 0.0;
+            FunctionBuilderChromosome c = chromosome as FunctionBuilderChromosome;
+            string function = c.BuildFunction();
+            double fitness = 0.0;
 
-            foreach (var input in m_inputs)
+            foreach (FunctionBuilderInput input in m_inputs)
             {
                 try
                 {
-                    var result = GetFunctionResult(function, input);
-                    var diff = Math.Abs(result - input.ExpectedResult);
+                    double result = GetFunctionResult(function, input);
+                    double diff = Math.Abs(result - input.ExpectedResult);
 
                     fitness += diff;
                 }
@@ -76,14 +77,14 @@ namespace GeneticAlgorithm.Mathematic
         /// <param name="input">The arguments values and expected results of the function.</param>
         public double GetFunctionResult(string function, FunctionBuilderInput input)
         {
-            var expression = new NCalc.Expression(function);
+            Expression expression = new NCalc.Expression(function);
 
             for (int i = 0; i < m_parameterNames.Length; i++)
             {
                 expression.Parameters.Add(m_parameterNames[i], input.Arguments[i]);
             }
 
-            var result = expression.Evaluate();
+            object result = expression.Evaluate();
 
             return (double)result;
         }

@@ -38,11 +38,11 @@ namespace GeneticAlgorithm.Implementations.CrossoverService
         /// </returns>
         protected override IList<IChromosome> PerformCross(IList<IChromosome> parents)
         {
-            var parent1 = parents[0];
-            var parent1Genes = parent1.GetGenes();
-            var parent2Genes = parents[1].GetGenes();
-            var parent3Genes = parents[2].GetGenes();
-            var offspring = parent1.CreateNew();
+            IChromosome parent1 = parents[0];
+            Gene[] parent1Genes = parent1.GetGenes();
+            Gene[] parent2Genes = parents[1].GetGenes();
+            Gene[] parent3Genes = parents[2].GetGenes();
+            IChromosome offspring = parent1.CreateNew();
             Gene parent1Gene;
 
             for (int i = 0; i < parent1.Length; i++)

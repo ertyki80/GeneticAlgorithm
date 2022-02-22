@@ -18,12 +18,12 @@ namespace GeneticAlgorithm.Implementations.OperatorStrategy
         /// <returns>The result chromosomes.</returns>
         public override IList<IChromosome> Cross(IPopulation population, ICrossover crossover, float crossoverProbability, IList<IChromosome> parents)
         {
-            var minSize = population.MinSize;
-            var offspring = new List<IChromosome>(minSize);
+            int minSize = population.MinSize;
+            List<IChromosome> offspring = new List<IChromosome>(minSize);
 
             for (int i = 0; i < minSize; i += crossover.ParentsNumber)
             {
-                var children = SelectParentsAndCross(population, crossover, crossoverProbability, parents, i);
+                IList<IChromosome> children = SelectParentsAndCross(population, crossover, crossoverProbability, parents, i);
                 if (children != null)
                 {
                     offspring.AddRange(children);

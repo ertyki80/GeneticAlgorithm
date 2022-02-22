@@ -36,7 +36,7 @@ namespace GeneticAlgorithm.Implementations.Mutation
         /// <param name="probability">The probability to mutate each chromosome.</param>
         protected override void PerformMutate (IChromosome chromosome, float probability)
         {
-            var binaryChromosome = chromosome as IBinaryChromosome;
+            IBinaryChromosome binaryChromosome = chromosome as IBinaryChromosome;
 
             if (binaryChromosome == null) 
             {
@@ -45,7 +45,7 @@ namespace GeneticAlgorithm.Implementations.Mutation
 
             if (m_rnd.GetDouble() <= probability)
             {
-                var index = m_rnd.GetInt(0, chromosome.Length);
+                int index = m_rnd.GetInt(0, chromosome.Length);
                 binaryChromosome.FlipGene (index);
             }
         }

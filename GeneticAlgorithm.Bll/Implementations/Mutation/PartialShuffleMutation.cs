@@ -39,7 +39,7 @@ namespace GeneticAlgorithm.Implementations.Mutation
             // Then is possible shuffle their in sequence.
             if (sequence.Distinct().Count() > 1)
             {
-                var result = sequence.Shuffle(RandomizationProvider.Current);
+                IEnumerable<T> result = sequence.Shuffle(RandomizationProvider.Current);
               
                 while (sequence.SequenceEqual(result))
                 {

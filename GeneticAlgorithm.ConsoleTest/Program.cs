@@ -19,34 +19,34 @@ namespace GeneticAlgorithm.ConsoleTest
             double maxY = 3.01;
             double minY = 0.01;
 		
-            var chromosome = new FloatingPointChromosome(
+            FloatingPointChromosome chromosome = new FloatingPointChromosome(
                 new double[] {minX,minY},
                 new double[] {maxX,maxY},
                 new int[] { 64,64},
                 new int[] { 16,16});
 
-            var population = new Population(50, 100, chromosome);
+            Population population = new Population(50, 100, chromosome);
 
-            var fitness = new FuncFitness((c) =>
+            FuncFitness fitness = new FuncFitness((c) =>
             {
-                var fc = c as FloatingPointChromosome;
+                FloatingPointChromosome fc = c as FloatingPointChromosome;
 
-                var values = fc.ToFloatingPoints();
-                var x1 = values[0];
-                var x2 = values[1];
+                double[] values = fc.ToFloatingPoints();
+                double x1 = values[0];
+                double x2 = values[1];
                 if (Math.Pow(x1, 2) == 0) return Double.NaN;
                 if ((Math.Pow(x1, 2) - Math.Pow(x2, 2)) == 0) return Double.NaN;
                 
-                var result = Math.Sin(x1) + Math.Exp(Math.Cos(Math.Pow(x2,2)));
+                double result = Math.Sin(x1) + Math.Exp(Math.Cos(Math.Pow(x2,2)));
                 return result;
             });
 
-            var selection = new TournamentSelection();
-            var crossover = new UniformCrossover(0.3f);
-            var mutation = new FlipBitMutation();
-            var termination = new FitnessThresholdTermination(3.71828182846);
+            TournamentSelection selection = new TournamentSelection();
+            UniformCrossover crossover = new UniformCrossover(0.3f);
+            FlipBitMutation mutation = new FlipBitMutation();
+            FitnessThresholdTermination termination = new FitnessThresholdTermination(3.71828182846);
 
-            var ga = new Implementations.GeneticAlgorithm(
+            Implementations.GeneticAlgorithm ga = new Implementations.GeneticAlgorithm(
                 population,
                 fitness,
                 selection,
@@ -62,13 +62,13 @@ namespace GeneticAlgorithm.ConsoleTest
             ga.Reinsertion = new ElitistReinsertion();
             Console.WriteLine("Generation: (x1, y1)");
 
-            var latestFitness = 0.0;
+            double latestFitness = 0.0;
             ga.GenerationRan += (sender, e) =>
             {
-                var bestChromosome = ga.BestChromosome as FloatingPointChromosome;
-                var bestFitness = bestChromosome.Fitness.Value;
+                FloatingPointChromosome bestChromosome = ga.BestChromosome as FloatingPointChromosome;
+                double bestFitness = bestChromosome.Fitness.Value;
                 
-                var phenotypeCurrent = bestChromosome.ToFloatingPoints();
+                double[] phenotypeCurrent = bestChromosome.ToFloatingPoints();
                 Console.WriteLine(
                     "Generation {0}: ({1},{2}) = {3}",
                     ga.GenerationsNumber,
@@ -79,7 +79,7 @@ namespace GeneticAlgorithm.ConsoleTest
                 if (Math.Abs(bestFitness - latestFitness) > 0.001)
                 {
                     latestFitness = bestFitness;
-                    var phenotype = bestChromosome.ToFloatingPoints();
+                    double[] phenotype = bestChromosome.ToFloatingPoints();
 
                     Console.WriteLine(
                         "BEST Generation {0,2}: ({1},{2}) = {3}",

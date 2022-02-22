@@ -30,7 +30,7 @@ namespace GeneticAlgorithm.Implementations.ChromosomeService
         /// <param name="index">The gene index.</param>
         public virtual void FlipGene (int index)    
         {
-            var value = (int) GetGene (index).Value;
+            int value = (int) GetGene (index).Value;
 
             ReplaceGene (index, new Gene (value == 0 ? 1 : 0));
         }

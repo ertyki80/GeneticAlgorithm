@@ -54,7 +54,7 @@ namespace GeneticAlgorithm.Implementations.FitnessService
         /// <param name="geneticAlgorithm">The genetic algorithm.</param>
         protected override bool PerformHasReached(IGeneticAlgorithm geneticAlgorithm)
         {
-            var bestFitness = geneticAlgorithm.BestChromosome.Fitness.Value;
+            double bestFitness = geneticAlgorithm.BestChromosome.Fitness.Value;
 
             if (m_lastFitness == bestFitness)
             {

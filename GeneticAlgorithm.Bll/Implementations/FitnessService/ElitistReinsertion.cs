@@ -34,11 +34,11 @@ namespace GeneticAlgorithm.Implementations.FitnessService
         /// <param name="parents">The parents.</param>
         protected override IList<IChromosome> PerformSelectChromosomes(IPopulation population, IList<IChromosome> offspring, IList<IChromosome> parents)
         {
-            var diff = population.MinSize - offspring.Count;
+            int diff = population.MinSize - offspring.Count;
 
             if (diff > 0)
             {
-                var bestParents = parents.OrderByDescending(p => p.Fitness).Take(diff).ToList();
+                List<IChromosome> bestParents = parents.OrderByDescending(p => p.Fitness).Take(diff).ToList();
 
                 for (int i = 0; i < bestParents.Count; i++)
                 {

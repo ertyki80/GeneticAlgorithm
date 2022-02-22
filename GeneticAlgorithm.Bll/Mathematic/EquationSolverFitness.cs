@@ -35,9 +35,9 @@ namespace GeneticAlgorithm.Mathematic
         /// <returns>The fitness of the chromosome.</returns>
         public double Evaluate(IChromosome chromosome)
         {
-            var equalityChromosome = chromosome as EquationChromosome;
+            EquationChromosome equalityChromosome = chromosome as EquationChromosome;
 
-            var fitness = Math.Abs(m_getEquationResult(equalityChromosome.GetGenes()) - m_expectedResult);
+            int fitness = Math.Abs(m_getEquationResult(equalityChromosome.GetGenes()) - m_expectedResult);
 
             return fitness * -1;
         }

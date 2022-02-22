@@ -52,7 +52,7 @@ namespace GeneticAlgorithm.Mathematic
         /// <param name="parametersCount">Parameters count.</param>
         public static ReadOnlyCollection<string> BuildAvailableOperations(int parametersCount)
         {
-            var availableOperations = new List<string>(new string[] { string.Empty, "+", "-", "/", "*", "__INT__" });
+            List<string> availableOperations = new List<string>(new string[] { string.Empty, "+", "-", "/", "*", "__INT__" });
             availableOperations.AddRange(GetParameterNames(parametersCount));
 
             return availableOperations.AsReadOnly();
@@ -81,11 +81,11 @@ namespace GeneticAlgorithm.Mathematic
         /// <returns>The function.</returns>
         public string BuildFunction()
         {
-            var builder = new StringBuilder();
+            StringBuilder builder = new StringBuilder();
 
-            foreach (var g in GetGenes())
+            foreach (Gene g in GetGenes())
             {
-                var op = g.Value.ToString();
+                string? op = g.Value.ToString();
 
                 if (!string.IsNullOrEmpty(op))
                 {
@@ -112,8 +112,8 @@ namespace GeneticAlgorithm.Mathematic
         /// <param name="geneIndex">Gene index.</param>
         public override Gene GenerateGene(int geneIndex)
         {
-            var rnd = RandomizationProvider.Current;
-            var op = m_availableOperations[rnd.GetInt(0, m_availableOperations.Count)];
+            IRandomization rnd = RandomizationProvider.Current;
+            string op = m_availableOperations[rnd.GetInt(0, m_availableOperations.Count)];
 
             if (op.Equals("__INT__", StringComparison.OrdinalIgnoreCase))
             {

@@ -24,8 +24,8 @@ namespace GeneticAlgorithm.Implementations.ChromosomeService
         {
             for (int i = 0; i < chromosomes.Count; i++)
             {
-                var c = chromosomes[i];
-                var notRepeatedGenesLength = c.GetGenes().Distinct().Count();
+                IChromosome c = chromosomes[i];
+                int notRepeatedGenesLength = c.GetGenes().Distinct().Count();
 
                 if (notRepeatedGenesLength < c.Length)
                 {

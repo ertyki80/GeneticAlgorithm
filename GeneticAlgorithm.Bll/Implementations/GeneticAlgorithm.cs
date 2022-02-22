@@ -220,7 +220,7 @@ namespace GeneticAlgorithm.Implementations
 
             private set
             {
-                var shouldStop = Stopped != null && m_state != value && value == GeneticAlgorithmState.Stopped;
+                bool shouldStop = Stopped != null && m_state != value && value == GeneticAlgorithmState.Stopped;
 
                 m_state = value;
 
@@ -348,10 +348,10 @@ namespace GeneticAlgorithm.Implementations
         /// <returns>True if termination has been reached, otherwise false.</returns>
         private bool EvolveOneGeneration()
         {
-            var parents = SelectParents();
-            var offspring = Cross(parents);
+            IList<IChromosome> parents = SelectParents();
+            IList<IChromosome> offspring = Cross(parents);
             Mutate(offspring);
-            var newGenerationChromosomes = Reinsert(offspring, parents);
+            IList<IChromosome> newGenerationChromosomes = Reinsert(offspring, parents);
             Population.CreateNewGeneration(newGenerationChromosomes);
             return EndCurrentGeneration();
         }
@@ -365,7 +365,7 @@ namespace GeneticAlgorithm.Implementations
             EvaluateFitness();
             Population.EndCurrentGeneration();
 
-            var handler = GenerationRan;
+            EventHandler handler = GenerationRan;
             handler?.Invoke(this, EventArgs.Empty);
 
             if (Termination.HasReached(this))
@@ -394,11 +394,11 @@ namespace GeneticAlgorithm.Implementations
         {
             try
             {
-                var chromosomesWithoutFitness = Population.CurrentGeneration.Chromosomes.Where(c => !c.Fitness.HasValue).ToList();
+                List<IChromosome> chromosomesWithoutFitness = Population.CurrentGeneration.Chromosomes.Where(c => !c.Fitness.HasValue).ToList();
 
                 for (int i = 0; i < chromosomesWithoutFitness.Count; i++)
                 {
-                    var c = chromosomesWithoutFitness[i];
+                    IChromosome c = chromosomesWithoutFitness[i];
 
                     TaskExecutor.Add(() =>
                     {
@@ -426,7 +426,7 @@ namespace GeneticAlgorithm.Implementations
         /// <param name="chromosome">The chromosome.</param>
         private void RunEvaluateFitness(object chromosome)
         {
-            var c = chromosome as IChromosome;
+            IChromosome c = chromosome as IChromosome;
 
             try
             {

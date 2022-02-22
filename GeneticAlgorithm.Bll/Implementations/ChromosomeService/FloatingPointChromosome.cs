@@ -74,7 +74,7 @@ namespace GeneticAlgorithm.Implementations.ChromosomeService
             if (geneValues == null)
             {
                 geneValues = new double[minValue.Length];
-                var rnd = RandomizationProvider.Current;
+                IRandomization rnd = RandomizationProvider.Current;
 
                 for (int i = 0; i < geneValues.Length; i++)
                 {

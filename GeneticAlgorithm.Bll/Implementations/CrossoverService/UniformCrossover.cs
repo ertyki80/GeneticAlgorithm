@@ -55,10 +55,10 @@ namespace GeneticAlgorithm.Implementations.CrossoverService
         /// <returns>The offspring (children) of the parents.</returns>
         protected override IList<IChromosome> PerformCross(IList<IChromosome> parents)
         {
-            var firstParent = parents[0];
-            var secondParent = parents[1];
-            var firstChild = firstParent.CreateNew();
-            var secondChild = secondParent.CreateNew();
+            IChromosome firstParent = parents[0];
+            IChromosome secondParent = parents[1];
+            IChromosome firstChild = firstParent.CreateNew();
+            IChromosome secondChild = secondParent.CreateNew();
 
             for (int i = 0; i < firstParent.Length; i++)
             {

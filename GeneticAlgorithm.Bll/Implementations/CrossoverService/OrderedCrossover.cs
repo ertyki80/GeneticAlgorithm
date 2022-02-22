@@ -5,6 +5,7 @@ using System.Linq;
 using GeneticAlgorithm.Helpers.Randomization;
 using GeneticAlgorithm.Implementations.ChromosomeService;
 using GeneticAlgorithm.Interfaces;
+using GeneticAlgorithm.Models;
 
 namespace GeneticAlgorithm.Implementations.CrossoverService
 {
@@ -61,20 +62,20 @@ namespace GeneticAlgorithm.Implementations.CrossoverService
         /// <returns>The offspring (children) of the parents.</returns>
         protected override IList<IChromosome> PerformCross(IList<IChromosome> parents)
         {
-            var parentOne = parents[0];
-            var parentTwo = parents[1];
+            IChromosome parentOne = parents[0];
+            IChromosome parentTwo = parents[1];
 
             if (parents.AnyHasRepeatedGene())
             {
                 throw new CrossoverException(this, "The Ordered Crossover (OX1) can be only used with ordered chromosomes. The specified chromosome has repeated genes.");
             }
 
-            var middleSectionIndexes = RandomizationProvider.Current.GetUniqueInts(2, 0, parentOne.Length);
+            int[] middleSectionIndexes = RandomizationProvider.Current.GetUniqueInts(2, 0, parentOne.Length);
             Array.Sort(middleSectionIndexes);
-            var middleSectionBeginIndex = middleSectionIndexes[0];
-            var middleSectionEndIndex = middleSectionIndexes[1];
-            var firstChild = CreateChild(parentOne, parentTwo, middleSectionBeginIndex, middleSectionEndIndex);
-            var secondChild = CreateChild(parentTwo, parentOne, middleSectionBeginIndex, middleSectionEndIndex);
+            int middleSectionBeginIndex = middleSectionIndexes[0];
+            int middleSectionEndIndex = middleSectionIndexes[1];
+            IChromosome firstChild = CreateChild(parentOne, parentTwo, middleSectionBeginIndex, middleSectionEndIndex);
+            IChromosome secondChild = CreateChild(parentTwo, parentOne, middleSectionBeginIndex, middleSectionEndIndex);
 
             return new List<IChromosome>() { firstChild, secondChild };
         }
@@ -89,15 +90,15 @@ namespace GeneticAlgorithm.Implementations.CrossoverService
         /// <param name="middleSectionEndIndex">Middle section end index.</param>
         private static IChromosome CreateChild(IChromosome firstParent, IChromosome secondParent, int middleSectionBeginIndex, int middleSectionEndIndex)
         {
-            var middleSectionGenes = firstParent.GetGenes().Skip(middleSectionBeginIndex).Take((middleSectionEndIndex - middleSectionBeginIndex) + 1);
+            IEnumerable<Gene> middleSectionGenes = firstParent.GetGenes().Skip(middleSectionBeginIndex).Take((middleSectionEndIndex - middleSectionBeginIndex) + 1);
 
-            using (var secondParentRemainingGenes = secondParent.GetGenes().Except(middleSectionGenes).GetEnumerator())
+            using (IEnumerator<Gene> secondParentRemainingGenes = secondParent.GetGenes().Except(middleSectionGenes).GetEnumerator())
             {
-                var child = firstParent.CreateNew();
+                IChromosome child = firstParent.CreateNew();
 
                 for (int i = 0; i < firstParent.Length; i++)
                 {
-                    var firstParentGene = firstParent.GetGene(i);
+                    Gene firstParentGene = firstParent.GetGene(i);
 
                     if (i >= middleSectionBeginIndex && i <= middleSectionEndIndex)
                     {
