@@ -2,9 +2,6 @@ using System;
 
 namespace GeneticAlgorithm.Implementations.OperatorStrategy.TaskExecution
 {
-    /// <summary>
-    /// An ITaskExecutor's implementation that executes the tasks in a linear fashion.
-    /// </summary>
     public class LinearTaskExecutor : TaskExecutorBase
     {
         #region implemented abstract members of TaskExecutorBase

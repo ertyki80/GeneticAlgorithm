@@ -1,28 +1,54 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>  
+<script src="js/canvasScript.js"></script>  
 
 <div>
     <div class="split-one left">
-        <div class="centered">
-            <h2>Initialize parameters for Genetic Algorithm</h2>
-            <p>Minimum X:  </p>
-            <p>Maximum X:  </p>
-            <p>Minimum Y:  </p>
-            <p>Maximum Y:  </p>
-        </div>
+        @using (Html.BeginForm("InitializeGeneticAlgorithm", "Home", FormMethod.Post))
+        {
+            <div class="centered">
+                <h4>Initialize parameters for Genetic Algorithm</h4>
+                <input type="text" id="minimumX" name="minimumX" placeholder="Minimum x..">
+                <input type="text" id="maximumX" name="maximumX" placeholder="Maximum x..">
+                <input type="text" id="minimumY" name="minimumY" placeholder="Minimum y..">
+                <input type="text" id="maximumY" name="maximumY" placeholder="Maximum y..">
+                <input type="text" id="populationMinSize" name="populationMinSize" placeholder="Population minimum size..">
+                <input type="text" id="populationMaxSize" name="populationMaxSize" placeholder="Population maximum size..">
+                <input type="text" id="crossoverProbability" name="crossoverProbability" placeholder="Crossover probability (float)..">
+                <input type="text" id="mutationProbability" name="mutationProbability" placeholder="Mutation probability (float)..">
+                <input type="submit" value="Submit" />
+            </div>
+            
+        }
+        <input type="submit" stryle="width:70%" value="Build Chart"  onclick="GetChartData()"/>
     </div>
 
 
     <div class="split-two right">
         <div class="centered">
-            <h2>John Doe</h2>
-            <p>Some text here too.</p>
+            <canvas id="scatterChart"></canvas>
         </div>
     </div>
 </div>
 
+
 <style>
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
 
 .split-one {
   height: 70%;
@@ -43,16 +69,15 @@
 
 .left {
   left: 0;
-  background-color: #1111;
 }
 
 .right {
   right: 0;
-  background-color: #4e555b;
-}
+  }
 
 .centered {
   position: absolute;
+  width: 74%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

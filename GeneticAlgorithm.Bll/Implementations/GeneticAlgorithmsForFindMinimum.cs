@@ -66,7 +66,7 @@ namespace GeneticAlgorithm.Implementations
             ga.CrossoverProbability = crossoverProbability;
             ga.MutationProbability = mutationProbability;
             
-            ga.TaskExecutor = new ParallelTaskExecutor();
+            ga.TaskExecutor = new LinearTaskExecutor();
             ga.Termination = termination;
             ga.OperatorsStrategy = new DefaultOperatorsStrategy();
             ga.Reinsertion = new ElitistReinsertion();
@@ -78,21 +78,32 @@ namespace GeneticAlgorithm.Implementations
         {
             List<GeneticAlgorithmResult> geneticAlgorithmResults = new List<GeneticAlgorithmResult>();
             double latestFitness = 0.0;
-            GeneticAlgorithm.GenerationRan += (sender, e) =>
+
+            GeneticAlgorithm.IsRunning = true;
+            int counter = 0;
+            GeneticAlgorithm.GenerationRan += delegate
             {
+                counter++;
                 FloatingPointChromosome bestChromosome = GeneticAlgorithm.BestChromosome as FloatingPointChromosome;
                 double currentFitness = bestChromosome.Fitness.Value;
-                
+
                 double[] phenotypeCurrent = bestChromosome.ToFloatingPoints();
-                
+
                 geneticAlgorithmResults.Add(new GeneticAlgorithmResult()
                 {
                     GenerationNumber = GeneticAlgorithm.GenerationsNumber,
-                    ValueX =  phenotypeCurrent[0],
-                    ValueY =  phenotypeCurrent[1],
+                    ValueX = GeneticAlgorithm.GenerationsNumber,
+                    ValueY = currentFitness,
                     Fitness = currentFitness
                 });
+                if (counter >= 1000)
+                {
+                    GeneticAlgorithm.Stop();
+                }
             };
+
+            GeneticAlgorithm.Start();
+
             return geneticAlgorithmResults;
         }
     }

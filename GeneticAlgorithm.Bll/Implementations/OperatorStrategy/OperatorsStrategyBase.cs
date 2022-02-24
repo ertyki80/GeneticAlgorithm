@@ -5,9 +5,6 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.OperatorStrategy
 {
-    /// <summary>
-    /// Defines an operators base strategy to be inherited either with linear or parallel execution
-    /// </summary>
     public abstract class OperatorsStrategyBase : IOperatorsStrategy
     {
         /// <summary>

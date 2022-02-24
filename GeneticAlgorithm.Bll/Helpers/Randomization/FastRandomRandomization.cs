@@ -3,10 +3,6 @@ using System.Threading;
 
 namespace GeneticAlgorithm.Helpers.Randomization
 {
-    /// <summary>
-    /// An IRandomization using FastRandom has pseudo-number generator.
-    /// <see href="http://www.codeproject.com/Articles/9187/A-fast-equivalent-for-System-Random"/>
-    /// </summary>
     public class FastRandomRandomization : RandomizationBase
     {
         private static readonly FastRandom _globalRandom = new(DateTime.Now.Millisecond);

@@ -5,13 +5,7 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.FitnessService
 {
-    /// <summary>
-    /// Fitness Based Reinsertion.
-    /// <remarks>
-    /// When there are more offspring than parents, select the only the best offspring to be reinserted, the parents are discarded.     
-    /// <see href="http://usb-bg.org/Bg/Annual_Informatics/2011/SUB-Informatics-2011-4-29-35.pdf">Generalized Nets Model of offspring Reinsertion in Genetic Algorithm</see>
-    /// </remarks>
-    /// </summary>
+
     [DisplayName("Fitness Based")]
     public class FitnessBasedReinsertion : ReinsertionBase
     {

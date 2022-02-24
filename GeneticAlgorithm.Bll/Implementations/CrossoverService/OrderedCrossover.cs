@@ -9,37 +9,6 @@ using GeneticAlgorithm.Models;
 
 namespace GeneticAlgorithm.Implementations.CrossoverService
 {
-    /// <summary>
-    /// Ordered Crossover (OX1).
-    /// <remarks>
-    /// Also know as: Order Crossover.
-    /// <para>
-    /// A portion of one parent is mapped to a portion of the other parent. 
-    /// From the replaced portion on, the rest is filled up by the remaining genes, where already present genes are omitted and the order is preserved.
-    /// <see href="http://en.wikipedia.org/wiki/Crossover_(genetic_algorithm)#Crossover_for_Ordered_Chromosomes">Crossover for Ordered Chromosomes</see>
-    /// </para>
-    /// <para>
-    /// The Ordered Crossover method is presented by Goldberg, is used when the problem is of order based, 
-    /// for example in Ushaped assembly line balancing etc. Given two parent 
-    /// chromosomes, two random crossover points are selected 
-    /// partitioning them into a left, middle and right portion. The 
-    /// ordered two-point crossover behaves in the following way: 
-    /// child1 inherits its left and right section from parent1, and its middle section is determined.
-    /// <see href="http://arxiv.org/ftp/arxiv/papers/1203/1203.3097.pdf">A Comparative Study of Adaptive Crossover Operators for Genetic Algorithms to Resolve the Traveling Salesman Problem</see>
-    /// </para>
-    /// <para>
-    /// The order crossover operator (Figure 4) was proposed by Davis (1985). 
-    /// The OX1 exploits a property of the path representation, that the order of cities (not their positions) are important. 
-    /// <see href="http://lev4projdissertation.googlecode.com/svn-history/r100/trunk/reading/read/aiRev99.pdf">Genetic Algorithms for the Travelling Salesman Problem - A Review of Representations and Operators</see>
-    /// </para>
-    /// <para>
-    /// Order 1 Crossover is a fairly simple permutation crossover. 
-    /// Basically, a swath of consecutive alleles from parent 1 drops down, 
-    /// and remaining values are placed in the child in the order which they appear in parent 2.
-    /// <see href="http://www.rubicite.com/Tutorials/GeneticAlgorithms/CrossoverOperators/Order1CrossoverOperator.aspx">Order 1 Crossover</see>
-    /// </para>
-    /// </remarks>
-    /// </summary>
     [DisplayName("Ordered (OX1)")]
     public sealed class OrderedCrossover : CrossoverBase
     {

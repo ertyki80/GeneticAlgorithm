@@ -4,12 +4,7 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.FitnessService
 {
-    /// <summary>
-    /// Fitness Stagnation Termination.    
-    /// <remarks>
-    /// The genetic algorithm will be terminate when the best chromosome's fitness has no change in the last generations specified.
-    /// </remarks>
-    /// </summary>
+
     [DisplayName("Fitness Stagnation")]
     public class FitnessStagnationTermination : TerminationBase
     {

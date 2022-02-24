@@ -4,9 +4,6 @@ using System.Threading.Tasks;
 
 namespace GeneticAlgorithm.Implementations.OperatorStrategy.TaskExecution
 {
-    /// <summary>
-    /// An ITaskExecutor's implementation that executes the tasks in a parallel fashion.
-    /// </summary>
     public class ParallelTaskExecutor : TaskExecutorBase
     {
         /// <summary>

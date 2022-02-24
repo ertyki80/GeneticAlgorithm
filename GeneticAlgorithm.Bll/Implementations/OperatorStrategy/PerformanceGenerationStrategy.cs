@@ -4,13 +4,6 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.OperatorStrategy
 {
-    /// <summary>
-    /// An IGenerationStrategy's implementation which takes into account the performance and just keep the last one generations in the population.
-    /// <remarks>
-    /// This strategy is not good for tracking all the generations, for this case use TrackingGenerationStrategy, 
-    /// but is the best one when you have a very long term termination.
-    /// </remarks>
-    /// </summary>
     [DisplayName("Performance")]
     public class PerformanceGenerationStrategy : IGenerationStrategy
     {

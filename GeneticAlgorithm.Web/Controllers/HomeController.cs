@@ -1,13 +1,20 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text.Json;
 using GeneticAlgorithm.Implementations;
 using GeneticAlgorithm.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using GeneticAlgorithm.Web.Models;
+using Newtonsoft.Json;
+using static System.Single;
 
 namespace GeneticAlgorithm.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private GeneticAlgorithmsForFindMinimum geneticAlgorithmsForFindMinimum;
         public HomeController()
         {
 
@@ -21,24 +28,89 @@ namespace GeneticAlgorithm.Web.Controllers
         
         [HttpPost]
         public IActionResult InitializeGeneticAlgorithm(
-            double[] limitX,
-            double[] limitY,
+            double maximumX,
+            double minimumX,
+            double minimumY,
+            double maximumY,
             int populationMinSize,
             int populationMaxSize,
-            float crossoverProbability,
-            float mutationProbability
+            string crossoverProbability,
+            string mutationProbability
         )
         {
-            IGeneticAlgorithmsForFindMinimum geneticAlgorithmsForFindMinimum = new GeneticAlgorithmsForFindMinimum();
-            geneticAlgorithmsForFindMinimum.Initialize(
-                limitX,
-                limitY,
-                populationMinSize,
-                populationMaxSize,
-                crossoverProbability,
-                mutationProbability
-            );
-            return Ok();
+            double[] limitX = {minimumX, maximumX};
+            double[] limitY = {minimumY, maximumY};
+
+            TryParse(crossoverProbability,out var mutationProb);
+
+            TryParse(mutationProbability,out var crossoverProb);
+
+            InputData inputData = new()
+            {
+                CrossoverProbability = crossoverProb,
+                MutationProbability = mutationProb,
+                X = limitX,
+                Y = limitY,
+                PopulationMaxSize = populationMaxSize,
+                PopulationMinSize = populationMinSize
+            };
+           
+            TempData["geneticAlgorithmsForFindMinimum"] = JsonConvert.SerializeObject(inputData);
+            return NoContent();
+        }
+        
+
+        [HttpPost]
+        public JsonResult GetGenerationFitness()
+        {
+            if (TempData["geneticAlgorithmsForFindMinimum"] != null)
+            {
+                var inputData =  JsonConvert.DeserializeObject<InputData>((string)TempData["geneticAlgorithmsForFindMinimum"]);
+                geneticAlgorithmsForFindMinimum = new GeneticAlgorithmsForFindMinimum();
+            
+                geneticAlgorithmsForFindMinimum.Initialize(
+                    inputData.X,
+                    inputData.Y,
+                    inputData.PopulationMinSize,
+                    inputData.PopulationMaxSize,
+                    inputData.CrossoverProbability,
+                    inputData.MutationProbability
+                );
+                GraphDataSet graphData = new()
+                {
+                    IsFilled = false,
+                    LabelForDataSet = "Result from GA",
+                    BorderColorForDataSet = "rgb(252, 3, 3)"
+                };
+                graphData.DataForDataSet = new List<ScatterConfig>();
+
+                var geneneticResults = geneticAlgorithmsForFindMinimum.Run();
+
+                foreach (var item in geneneticResults)
+                {
+                    graphData.DataForDataSet.Add(
+                        new ScatterConfig()
+                        {
+                            X = item.ValueX,
+                            Y = item.ValueY,
+                        });
+                }
+
+                List<GraphDataSet> graphDataSets = new List<GraphDataSet>();
+                graphDataSets.Add(graphData);
+                GraphData graphDataSet = new GraphData()
+                {
+                    DataSets = graphDataSets
+                };
+                
+                string jsonGraphdata = JsonConvert.SerializeObject(graphDataSet);
+
+                return new JsonResult(jsonGraphdata);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public IActionResult Privacy()

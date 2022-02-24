@@ -6,14 +6,7 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.CrossoverService
 {
-    /// <summary>
-    /// The Uniform Crossover uses a fixed mixing ratio between two parents. 
-    /// Unlike one-point and two-point crossover, the Uniform Crossover enables the parent chromosomes to contribute the gene level rather than the segment level.
-    /// <remarks>
-    /// If the mix probability is 0.5, the offspring has approximately half of the genes from first parent and the other half from second parent, although cross over points can be randomly chosen.
-    /// </remarks>
-    /// <see href="http://en.wikipedia.org/wiki/Crossover_(genetic_algorithm)#Uniform_Crossover_and_Half_Uniform_Crossover">Wikipedia</see>
-    /// </summary>
+
     [DisplayName("Uniform")]
     public class UniformCrossover : CrossoverBase
     {

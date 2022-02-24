@@ -5,13 +5,7 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.FitnessService
 {
-    /// <summary>
-    /// Elitist reinsertion.
-    /// <remarks>
-    /// When there are less offspring than parents, select the best parents to be reinserted together with the offspring. 
-    /// <see href="http://usb-bg.org/Bg/Annual_Informatics/2011/SUB-Informatics-2011-4-29-35.pdf">Generalized Nets Model of offspring Reinsertion in Genetic Algorithm</see>
-    /// </remarks>
-    /// </summary>
+
     [DisplayName("Elitist")]
     public class ElitistReinsertion : ReinsertionBase
     {

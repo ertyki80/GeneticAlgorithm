@@ -3,9 +3,6 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.OperatorStrategy
 {
-    /// <summary>
-    /// Defines an operators strategy which use a linear execution
-    /// </summary>
     public class DefaultOperatorsStrategy : OperatorsStrategyBase
     {
         /// <summary>

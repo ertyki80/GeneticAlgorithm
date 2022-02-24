@@ -40,19 +40,6 @@ namespace GeneticAlgorithm.Implementations
         TerminationReached
     }
     #endregion
-
-    /// <summary>
-    /// A genetic algorithm (GA) is a search heuristic that mimics the process of natural selection. 
-    /// This heuristic (also sometimes called a metaheuristic) is routinely used to generate useful solutions 
-    /// to optimization and search problems. Genetic algorithms belong to the larger class of evolutionary 
-    /// algorithms (EA), which generate solutions to optimization problems using techniques inspired by natural evolution, 
-    /// such as inheritance, mutation, selection, and crossover.
-    /// <para>
-    /// Genetic algorithms find application in bioinformatics, phylogenetics, computational science, engineering, 
-    /// economics, chemistry, manufacturing, mathematics, physics, pharmacometrics, game development and other fields.
-    /// </para>
-    /// <see href="http://http://en.wikipedia.org/wiki/Genetic_algorithm">Wikipedia</see>
-    /// </summary>
     public sealed class GeneticAlgorithm : IGeneticAlgorithm
     {
         #region Constants
@@ -240,6 +227,10 @@ namespace GeneticAlgorithm.Implementations
             get
             {
                 return State == GeneticAlgorithmState.Started || State == GeneticAlgorithmState.Resumed;
+            }
+            set
+            {
+                State = GeneticAlgorithmState.Started;
             }
         }
 

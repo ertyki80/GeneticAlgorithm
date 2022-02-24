@@ -3,12 +3,6 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.OperatorStrategy.TaskExecution
 {
-    /// <summary>
-    /// Fitness Threshold Termination
-    /// <remarks>
-    /// The genetic algorithm will be terminate when the best chromosome reach the expected fitness.
-    /// </remarks>
-    /// </summary>
     [DisplayName("Fitness Threshold")]
     public class FitnessThresholdTermination : TerminationBase
     {

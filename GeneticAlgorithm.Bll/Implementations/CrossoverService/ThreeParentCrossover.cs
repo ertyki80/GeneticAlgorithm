@@ -6,15 +6,7 @@ using GeneticAlgorithm.Models;
 
 namespace GeneticAlgorithm.Implementations.CrossoverService
 {
-    /// <summary>
-    /// Three Parent Crossover.
-    /// <remarks>
-    /// In this technique, the child is derived from three parents. 
-    /// They are randomly chosen. Each bit of first parent is checked with bit of second parent whether they are same. 
-    /// If same then the bit is taken for the offspring otherwise the bit from the third parent is taken for the offspring.
-    /// <see href="http://en.wikipedia.org/wiki/Crossover_(genetic_algorithm)#Three_parent_crossover">Wikipedia</see>
-    /// </remarks>
-    /// </summary>
+
     [DisplayName("Three Parent")]
     public class ThreeParentCrossover : CrossoverBase
     {

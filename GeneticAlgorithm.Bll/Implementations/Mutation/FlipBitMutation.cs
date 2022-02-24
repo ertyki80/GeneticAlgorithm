@@ -5,12 +5,6 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.Mutation
 {
-    /// <summary>
-    /// Takes the chosen genome and inverts the bits (i.e. if the genome bit is 1, it is changed to 0 and vice versa).
-    /// </summary>
-    /// <remarks>
-    /// When using this mutation the genetic algorithm should use IBinaryChromosome.
-    /// </remarks>
     [DisplayName("Flip Bit")]
     public class FlipBitMutation : MutationBase
     {

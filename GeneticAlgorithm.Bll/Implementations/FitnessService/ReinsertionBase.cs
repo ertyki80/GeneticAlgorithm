@@ -4,9 +4,7 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.FitnessService
 {
-    /// <summary>
-    /// Base class for IReinsertion's implementations.
-    /// </summary>
+
     public abstract class ReinsertionBase : IReinsertion
     {
         #region Constructors

@@ -6,9 +6,7 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.FitnessService
 {
-    /// <summary>
-    /// Exception throw when an error occurs during the execution of fitness evaluation.
-    /// </summary>
+
     [Serializable]
     public sealed class FitnessException : Exception
     {

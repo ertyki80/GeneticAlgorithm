@@ -4,9 +4,6 @@ using GeneticAlgorithm.Interfaces;
 
 namespace GeneticAlgorithm.Implementations.FitnessService
 {
-    /// <summary>
-    /// An IFitness implementation that defer the fitness evaluation to a Func.
-    /// </summary>
     public class FuncFitness : IFitness
     {
         private readonly Func<IChromosome, double> m_func;
